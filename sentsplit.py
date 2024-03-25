@@ -17,13 +17,18 @@ def split_sentence(text: str, min_length: int = 32, max_length: int = 256, retur
             cur += 1
             continue
         # 标点符号切分
-        region = re.sub("([。！？；!?;])([^”’])", r"\1\n\2", region)
-        region = re.sub("([。！？；!?;][”’])(.)", r"\1\n\2", region)
+        region = re.sub('([。！？；!?;])([^”’])', r'\1\n\2', region)
+        region = re.sub('([。！？；!?;][”’])(.)', r'\1\n\2', region)
         region = region.split('\n')
         # 短句合并 长句细分
         start = 0
         end = len(region)
         before = len(sents)
+        if end == 1 and n > max_length:
+            # 汉字+'.'
+            region = re.sub('([\u4e00-\u9fa5][\.])(.)', r'\1\n\2', region[0])
+            region = region.split('\n')
+            end = len(region)
         while start < end:
             sent = region[start]
             n = len(sent)
