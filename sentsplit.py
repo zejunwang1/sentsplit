@@ -50,7 +50,7 @@ def split_sentence(text: str, min_length: int = 32, max_length: int = 256, retur
             while len(sent) > max_length:
                 move = 1
                 while move < maxMove:
-                    if sent[max_length - move] in [',', '，']:
+                    if sent[max_length - move] in [',', '，', ' ', '\t']:
                         break
                     move += 1
                 if move == maxMove:
