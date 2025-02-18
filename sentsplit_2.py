@@ -11,7 +11,7 @@ def split_sentence(
     # 当前字符位置
     cur = 0
     # 最大回溯长度
-    maxMove = int(max_length / 2)
+    maxMove = max_length - min_length
     # 段落划分
     regions = text.split('\n')
 
